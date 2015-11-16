@@ -34,20 +34,20 @@ class CartAndItemModelsTestCase(TestCase):
                                  unit_price=Decimal("100")):
         """
             Helper function so I don't repeat myself
-        """  
+        """
         item = models.Item()
         item.cart = cart
         item.product = product
         item.quantity = quantity
         item.unit_price = unit_price
-        item.save() 
+        item.save()
 
         return item
 
     def _create_user_in_database(self):
         """
             Helper function so I don't repeat myself
-        """ 
+        """
         user = User.objects.create(username="user_for_sell", password="sold",
                                    email="example@example.com")
         return user
@@ -66,9 +66,9 @@ class CartAndItemModelsTestCase(TestCase):
             any model via django's content type framework. This was
             made in order to enable you to associate an item in the
             cart with your product model.
-            
+
             As I wont make a product model here, I will assume my test
-            store sells django users (django.contrib.auth.models.User) 
+            store sells django users (django.contrib.auth.models.User)
             (lol) so I can test that this is working.
 
             So if you are reading this test to understand the API,
@@ -99,7 +99,7 @@ class CartAndItemModelsTestCase(TestCase):
     def test_total_item_price(self):
         """
         Since the unit price is a Decimal field, prefer to associate
-        unit prices instantiating the Decimal class in 
+        unit prices instantiating the Decimal class in
         decimal.Decimal.
         """
         user = self._create_user_in_database()
@@ -112,7 +112,7 @@ class CartAndItemModelsTestCase(TestCase):
         )
 
         self.assertEquals(item_with_unit_price_as_integer.total_price, 300)
-        
+
         # this is the right way to associate unit prices
         item_with_unit_price_as_decimal = self._create_item_in_database(
             cart, product=user, quantity=4, unit_price=Decimal("3.20")
