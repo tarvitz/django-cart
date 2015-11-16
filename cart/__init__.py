@@ -1,1 +1,2 @@
-from cart import Cart, ItemAlreadyExists, ItemDoesNotExist
+# -*- coding: utf-8 -*-
+default_app_config = 'cart.apps.CartConfig'
