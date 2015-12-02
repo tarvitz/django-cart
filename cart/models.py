@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
 
+@python_2_unicode_compatible
 class Cart(models.Model):
     creation_date = models.DateTimeField(verbose_name=_('creation date'))
     checked_out = models.BooleanField(default=False,
@@ -14,7 +15,7 @@ class Cart(models.Model):
         verbose_name_plural = _('carts')
         ordering = ('-creation_date',)
 
-    @python_2_unicode_compatible
+
     def __str__(self):
         return force_text(self.creation_date)
 
@@ -30,6 +31,7 @@ class ItemManager(models.Manager):
         return super(ItemManager, self).get(*args, **kwargs)
 
 
+@python_2_unicode_compatible
 class Item(models.Model):
     cart = models.ForeignKey(Cart, verbose_name=_('cart'))
     quantity = models.PositiveIntegerField(verbose_name=_('quantity'))
@@ -46,7 +48,6 @@ class Item(models.Model):
         verbose_name_plural = _('items')
         ordering = ('cart',)
 
-    @python_2_unicode_compatible
     def __str__(self):
         return u'%d units of %s' % (
             self.quantity, self.product.__class__.__name__

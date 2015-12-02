@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from decimal import Decimal
 
 from django.test import TestCase, RequestFactory, Client
