@@ -15,7 +15,6 @@ class Cart(models.Model):
         verbose_name_plural = _('carts')
         ordering = ('-creation_date',)
 
-
     def __str__(self):
         return force_text(self.creation_date)
 
